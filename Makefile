@@ -63,7 +63,7 @@ TEST_SRC	=	tests/redirect.c	\
 			tests/mem.c
 TEST_FLAGS	=	--coverage -lcriterion
 
-GDB_MAIN	=	tests/main.c
+GDB_MAIN	=	src/main.c
 GDB_NAME	=	gdb.out
 
 .PHONY: tclean gclean fclean lclean lfclean

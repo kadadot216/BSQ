@@ -40,7 +40,7 @@ int	load_file_from_buffer(char *buffer, char const *filepath)
 	return (1);
 }
 
-int	get_nb_rows(char *buffer)
+int	get_nb_cols(char *buffer)
 {
 	int	nb_rows = 0;
 
@@ -49,14 +49,15 @@ int	get_nb_rows(char *buffer)
 	return (nb_rows);
 }
 
-int	get_nb_cols(char *buffer)
+int	get_nb_rows(char *buffer)
 {
 	int	i = 0;
 	int	nb_cols = 0;
 
 	while (buffer[i] != '\0') {
-		if (buffer[i] != '\n')
+		if (buffer[i] == '\n')
 			nb_cols++;
+		i++;
 	}
 	return (nb_cols);
 }
@@ -75,6 +76,7 @@ char	**load_2d_arr_from_buffer(char *buffer, int nb_rows, int nb_cols)
 		i += (nb_cols + 1);
 		j++;
 	}
+	arr[nb_rows + 1] = NULL;
 	return (arr);
 }
 
@@ -108,16 +110,19 @@ square_t	find_biggest_square(board_t *b)
 	while (y < b->nb_rows && x < b->nb_cols) {
 		if (is_square_of_size(b->map, x, y, offset))
 			offset++;
-		else if (offset < square.size) {
+		else if (offset > square.size) {
 			square.size = offset;
 			square.ox = x;
 			square.oy = y;
+			offset = 0;
+		} else {
 			offset = 0;
 		}
 		if (x == b->nb_cols - 1) {
 			y++;
 			x = 0;
 		}
+		x++;
 	}
 	my_putstr("Biggest square at pos (");
 	my_put_nbr(square.ox);
@@ -127,7 +132,36 @@ square_t	find_biggest_square(board_t *b)
 	return (square);
 }
 
-void	display_square
+int	in_square(int x, int y, square_t *square)
+{
+	int	size = square->size;
+	int	ox = square->ox;
+	int	oy = square->oy;
+
+	if (x >= ox && x <= ox + size && y >= oy && y <= oy + size) {
+		return (1);
+	} else {
+		return (0);
+	}
+}
+
+void	display_square(square_t *square, board_t *board)
+{
+	int	x = 0;
+	int	y = 0;
+
+	while (y < board->nb_rows && x < board->nb_cols) {
+		if (in_square(x, y, square))
+			my_putchar('X');
+		else
+			my_putchar(board->map[y][x]);
+		x++;
+		if (x == board->nb_cols - 1) {
+			y++;
+			x = 0;
+		}
+	}
+}
 
 int	main(int ac, char **av)
 {
@@ -140,6 +174,6 @@ int	main(int ac, char **av)
 	if (board.status == OFF)
 		return (84);
 	biggest_square = find_biggest_square(&board);
-	display_square(&square, &board);
+	display_square(&biggest_square, &board);
 	return (0);
 }
