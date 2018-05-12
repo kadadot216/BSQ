@@ -95,50 +95,13 @@ board_t	init_board(char const *filepath)
 	return (b);
 }
 
-square_t	find_biggest_square(board_t *b)
-{
-	square_t	square;
-
-	square.ox = 0;
-	square.oy = 0;
-	square.size = 1;
-	int	x = 0;
-	int	y = 0;
-	int	offset = 1;
-
-
-	while (y < b->nb_rows && x < b->nb_cols) {
-		if (is_square_of_size(b->map, x, y, offset))
-			offset++;
-		else if (offset > square.size) {
-			square.size = offset;
-			square.ox = x;
-			square.oy = y;
-			offset = 0;
-		} else {
-			offset = 0;
-		}
-		if (x == b->nb_cols - 1) {
-			y++;
-			x = 0;
-		}
-		x++;
-	}
-	my_putstr("Biggest square at pos (");
-	my_put_nbr(square.ox);
-	my_putstr(", ");
-	my_put_nbr(square.oy);
-	my_putstr(")\n");
-	return (square);
-}
-
 int	in_square(int x, int y, square_t *square)
 {
 	int	size = square->size;
 	int	ox = square->ox;
 	int	oy = square->oy;
 
-	if (x >= ox && x <= ox + size && y >= oy && y <= oy + size) {
+	if (x >= ox && x < ox + size && y >= oy && y < oy + size) {
 		return (1);
 	} else {
 		return (0);
@@ -159,9 +122,48 @@ void	display_square(square_t *square, board_t *board)
 		if (x == board->nb_cols - 1) {
 			y++;
 			x = 0;
+			my_putchar('\n');
 		}
 	}
 }
+
+square_t	find_biggest_square(board_t *b)
+{
+	square_t	square;
+
+	square.ox = 0;
+	square.oy = 0;
+	square.size = 0;
+	int	x = 0;
+	int	y = 0;
+	int	offset = 0;
+
+	while (y < b->nb_rows && x < b->nb_cols) {
+		while (offset < b->nb_rows - y && is_square_of_size(b->map, x, y, (offset + 1)))
+			offset++;
+		if (offset > square.size) {
+			square.size = offset;
+			square.ox = x;
+			square.oy = y;
+		}
+		x++;
+		if (x == (b->nb_cols - 1) && y < b->nb_rows) {
+			y++;
+			x = 0;
+		} 
+		offset = 0;
+	}
+	my_putstr("Biggest square at pos (");
+	my_put_nbr(square.ox);
+	my_putstr(", ");
+	my_put_nbr(square.oy);
+	my_putstr(")\n");
+	my_putstr("of size: ");
+	my_put_nbr(square.size);
+	my_putstr("\n");
+	return (square);
+}
+
 
 int	main(int ac, char **av)
 {
