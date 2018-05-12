@@ -43,6 +43,8 @@ SRC		=	src/board.c		\
 			src/clean.c		\
 			src/board_check.c	\
 			src/square_info.c
+
+BONUS		=	bonus/bonus_square_info.c
 		
 OBJ		=	$(SRC:.c=.o)
 
@@ -57,7 +59,7 @@ TEST_FLAGS	=	--coverage -lcriterion
 GDB_MAIN	=	src/main.c
 GDB_NAME	=	gdb.out
 
-.PHONY: tclean gclean fclean lclean lfclean
+.PHONY: tclean gclean fclean lclean lfclean bonus
 
 all:	lib $(NAME)
 
@@ -83,6 +85,10 @@ libre: libfclean lib
 #	Program rules
 $(NAME):
 	$(CC) $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(LDFLAGS) $(LIBFLAG)
+
+bonus: fclean lib
+	$(CC) -D BONUS=1 $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(BONUS) \
+	       	$(LDFLAGS) $(LIBFLAG)
 
 re: fclean all
 
