@@ -1,2 +1,8 @@
 b main
-r rectangle
+r ../rectangle
+n
+n
+n
+s
+display curr.status
+display best.status

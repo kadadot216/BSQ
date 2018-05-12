@@ -9,7 +9,7 @@
 #include "square.h"
 #include "board.h"
 
-int	is_square_of_size(char **map, int col, int row, int square_size)
+int		is_square_of_size(char **map, int col, int row, int square_size)
 {
 	int	i = col;
 	int	j = row;
@@ -39,7 +39,7 @@ static int	in_square(int x, int y, square_t *square)
 	}
 }
 
-void	display_square(square_t *square, board_t *board)
+void		display_square(square_t *square, board_t *board)
 {
 	int	x = 0;
 	int	y = 0;

@@ -63,7 +63,7 @@ static int	get_nb_rows(char *buffer)
 	return (nb_cols);
 }
 
-board_t	init_board(char const *filepath)
+board_t		init_board(char const *filepath)
 {
 	char	buffer[MAXBUFSIZE] = {0};
 

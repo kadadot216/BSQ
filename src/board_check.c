@@ -13,7 +13,7 @@ static int	is_valid_char(char point)
 		return (0);
 }
 
-int	check_board_integrity(char **map, int nb_rows, int nb_cols)
+int		check_board_integrity(char **map, int nb_rows, int nb_cols)
 {
 	int	x = 0;
 	int	y = 0;
