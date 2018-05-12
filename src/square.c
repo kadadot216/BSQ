@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** square.c
-** File description:
-** Functions for squares
-*/
-
 #include "my.h"
 #include "square.h"
 #include "board.h"

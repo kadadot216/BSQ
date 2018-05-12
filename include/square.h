@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** square.h
-** File description:
-** Header file for square structure
-*/
-
 #ifndef __SQUARE_H__
 #define __SQUARE_H__
 
@@ -18,5 +11,8 @@ typedef struct	square_s {
 }	square_t;
 
 int	is_square_of_size(char **map, int col, int row, int square_size);
+#if defined(EXT)
+void	display_square_info(square_t *square);
+#endif
 
 #endif

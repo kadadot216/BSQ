@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** clean.c
-** File description:
-** Clearing structures functions
-*/
-
 #include <stdlib.h>
 #include "board.h"
 #include "square.h"

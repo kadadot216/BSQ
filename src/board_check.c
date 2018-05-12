@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** board_check.c
-** File description:
-** Function for board checking
-*/
-
 static int	is_valid_char(char point)
 {
 	if (point == 'o' || point == '.' || point == '\n' || point == '\0')

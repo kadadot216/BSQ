@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** debug.c
-** File description:
-** Main file for GDB
-*/
-
 #include "main.h"
 #include "my.h"
 

@@ -1,10 +1,3 @@
-##
-## EPITECH PROJECT, 2018
-## Makefile
-## File description:
-## Makefile for bsq
-##
-
 CC		=	gcc
 DBCC		=	gcc -g
 RM		=	rm -f
@@ -43,6 +36,8 @@ SRC		=	src/board.c		\
 			src/clean.c		\
 			src/board_check.c	\
 			src/square_info.c
+
+ext		=	ext/ext_square_info.c
 		
 OBJ		=	$(SRC:.c=.o)
 
@@ -57,7 +52,7 @@ TEST_FLAGS	=	--coverage -lcriterion
 GDB_MAIN	=	src/main.c
 GDB_NAME	=	gdb.out
 
-.PHONY: tclean gclean fclean lclean lfclean
+.PHONY: tclean gclean fclean lclean lfclean ext
 
 all:	lib $(NAME)
 
@@ -84,12 +79,16 @@ libre: libfclean lib
 $(NAME):
 	$(CC) $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(LDFLAGS) $(LIBFLAG)
 
+ext: fclean lib
+	$(CC) -DEXT=1 $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(ext) \
+	       	$(LDFLAGS) $(LIBFLAG)
+
 re: fclean all
 
 clean:
 	$(RM) $(OBJ)
 
-fclean:	clean
+fclean:	clean libfclean
 	$(RM) $(NAME)
 
 #	Tests rules

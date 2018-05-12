@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** square_info.c
-** File description:
-** Info function for square structures
-*/
-
 #include "my.h"
 #include "square.h"
 #include "board.h"
@@ -24,18 +17,6 @@ int	is_square_of_size(char **map, int col, int row, int square_size)
 			i++;
 	}
 	return (1);
-}
-
-void	display_square_info(square_t *square)
-{
-	my_putstr("Biggest square at pos (");
-	my_put_nbr(square->ox);
-	my_putstr(", ");
-	my_put_nbr(square->oy);
-	my_putstr(")\n");
-	my_putstr("of size: ");
-	my_put_nbr(square->size);
-	my_putstr("\n");
 }
 
 static int	in_square(int x, int y, square_t *square)
@@ -68,4 +49,7 @@ void	display_square(square_t *square, board_t *board)
 			my_putchar('\n');
 		}
 	}
+	#if defined(EXT)
+		display_square_info(square);
+	#endif
 }

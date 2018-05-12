@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** board.c
-** File description:
-** Board functions
-*/
-
 #include "fsys.h"
 #include "my.h"
 #include "board.h"
