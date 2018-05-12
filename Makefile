@@ -20,18 +20,11 @@ LIB_HDSRC	=	my.h
 LIB_HDS		=	$(addprefix $(LIB_HDPATH)/, $(LIB_HDSRC))
 
 LIB_SRCS	=	my_putstr.c		\
-			my_str_hasnum.c		\
+			my_puterror.c		\
 			my_put_nbr.c		\
 			my_putchar.c		\
-			my_char_isnum.c		\
-			my_strlen.c		\
-			my_strcat.c		\
-			my_strncmp.c		\
-			my_strdup.c		\
 			my_strncpy.c		\
 			my_memset.c		\
-			my_strtotabpt.c		\
-			my_getnbr.c
 
 LIB_SRC		=	$(addprefix $(LIB_PATH)/, $(LIB_SRCS))
 LIB_OBJ		=	$(LIB_SRC:.c=.o)
@@ -45,22 +38,20 @@ LIBFLAG		=	-l$(LIB_NAMEDIR)
 
 NAME		=	bsq
 MAIN		=	src/main.c
-SRC		=	src/fsys.c		\
-			src/bsq_helpers.c	\
-			src/buffer.c		\
-			src/cat.c		\
-			src/get.c		\
-			src/array.c		\
-			src/mem.c		\
-			src/print.c
+SRC		=	src/board.c		\
+			src/square.c		\
+			src/clean.c		\
+			src/board_check.c	\
+			src/square_info.c
+		
 OBJ		=	$(SRC:.c=.o)
 
 #	Tests settings
 TEST_NAME	=	unit_tests
-TEST_SRC	=	tests/redirect.c	\
-			tests/t_fsys.c		\
-			tests/arrays.c		\
-			tests/mem.c
+TEST_SRC	=	#
+			
+			
+			
 TEST_FLAGS	=	--coverage -lcriterion
 
 GDB_MAIN	=	src/main.c

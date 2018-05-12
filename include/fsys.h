@@ -12,9 +12,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#define BUFF_SIZE (4096)
-
-int	fs_open_file(char const *filepath);
-void	fs_understand_return_of_read(int fd, char *buffer, int size);
+#define MAXBUFSIZE (4096)
 
 #endif
