@@ -56,7 +56,7 @@ void		display_square(square_t *square, board_t *board)
 			my_putchar('\n');
 		}
 	}
-	#if defined(BONUS)
+	#if defined(EXT)
 		display_square_info(square);
 	#endif
 }

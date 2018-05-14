@@ -18,7 +18,7 @@ typedef struct	square_s {
 }	square_t;
 
 int	is_square_of_size(char **map, int col, int row, int square_size);
-#if defined(BONUS)
+#if defined(EXT)
 void	display_square_info(square_t *square);
 #endif
 

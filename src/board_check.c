@@ -18,6 +18,8 @@ int		check_board_integrity(char **map, int nb_rows, int nb_cols)
 	int	x = 0;
 	int	y = 0;
 
+	if (nb_rows == 0 || nb_cols == 0)
+		return (0);
 	while ((y < nb_rows) && (x < nb_cols)) {
 		if (!is_valid_char(map[y][x]))
 			return (0);

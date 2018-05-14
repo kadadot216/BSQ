@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2018
-** bonus_square_info.c
+** ext_square_info.c
 ** File description:
-** Bonus file for more display options
+** ext file for more display options
 */
 
 #include "square.h"

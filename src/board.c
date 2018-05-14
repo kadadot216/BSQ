@@ -30,6 +30,9 @@ int nb_rows, int nb_cols)
 	int	j = 0;
 
 	arr = malloc(sizeof(char *) * (nb_rows + 1));
+	while (my_char_isnum(buffer[i]) && buffer[i] != '\n')
+		i++;
+	i++;
 	while (j < nb_rows) {
 		arr[j] = malloc(sizeof(char) * (nb_cols + 1));
 		my_memset(arr[j], '\0', (nb_cols + 1));
@@ -43,24 +46,30 @@ int nb_rows, int nb_cols)
 
 static int	get_nb_cols(char *buffer)
 {
-	int	nb_rows = 0;
+	int	i = 0;
+	int	nb_cols = 0;
 
-	while (buffer[nb_rows] != '\n')
-		nb_rows++;
-	return (nb_rows);
+	while (buffer[i] != '\n')
+		i++;
+	i++;
+	while (buffer[i] != '\n') {
+		i++;
+		nb_cols++;
+	}
+	return (nb_cols);
 }
 
 static int	get_nb_rows(char *buffer)
 {
 	int	i = 0;
-	int	nb_cols = 0;
 
-	while (buffer[i] != '\0') {
-		if (buffer[i] == '\n')
-			nb_cols++;
+	while (buffer[i] != '\n') {
 		i++;
 	}
-	return (nb_cols);
+	if (!my_strn_isnum(buffer, i))
+		return (0);
+	else
+		return (my_getnbrn(buffer, i));
 }
 
 board_t		init_board(char const *filepath)

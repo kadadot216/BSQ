@@ -25,6 +25,9 @@ LIB_SRCS	=	my_putstr.c		\
 			my_putchar.c		\
 			my_strncpy.c		\
 			my_memset.c		\
+			my_getnbrn.c		\
+			my_char_isnum.c		\
+			my_strn_isnum.c
 
 LIB_SRC		=	$(addprefix $(LIB_PATH)/, $(LIB_SRCS))
 LIB_OBJ		=	$(LIB_SRC:.c=.o)
@@ -44,7 +47,7 @@ SRC		=	src/board.c		\
 			src/board_check.c	\
 			src/square_info.c
 
-BONUS		=	bonus/bonus_square_info.c
+EXT		=	ext/ext_square_info.c
 		
 OBJ		=	$(SRC:.c=.o)
 
@@ -59,7 +62,7 @@ TEST_FLAGS	=	--coverage -lcriterion
 GDB_MAIN	=	src/main.c
 GDB_NAME	=	gdb.out
 
-.PHONY: tclean gclean fclean lclean lfclean bonus
+.PHONY: tclean gclean fclean lclean lfclean ext
 
 all:	lib $(NAME)
 
@@ -86,8 +89,8 @@ libre: libfclean lib
 $(NAME):
 	$(CC) $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(LDFLAGS) $(LIBFLAG)
 
-bonus: fclean lib
-	$(CC) -D BONUS=1 $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(BONUS) \
+ext: fclean lib
+	$(CC) -D EXT=1 $(CFLAGS) -o $(NAME) $(MAIN) $(SRC) $(EXT) \
 	       	$(LDFLAGS) $(LIBFLAG)
 
 re: fclean all
@@ -95,7 +98,7 @@ re: fclean all
 clean:
 	$(RM) $(OBJ)
 
-fclean:	clean
+fclean:	clean libfclean
 	$(RM) $(NAME)
 
 #	Tests rules
